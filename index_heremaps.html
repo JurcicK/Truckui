@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>RoadBlockUI</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@500&display=swap" rel="stylesheet">
+		<script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+		<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+		<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-harp.js"></script>
+    </head>
+    <body>
+		<div class="container-fluid d-flex flex-column h-100">
+		  <div class="row h-100 d-flex">
+		    <div class="col px-0 d-flex flex-column">
+		    	<div class="row pt-5 pb-5">
+		    	</div>
+		    	<div class="row pt-4">
+		    		<div class="col d-flex justify-content-center">
+		      			<div id="infoboxtop" class="rectangle">
+		      				<div class="row">
+		      					<div class="col-4 d-flex justify-content-center">
+		      						<img src = "img/steering-wheel.png" alt="Underline speed" class="pb-2 pt-2" />
+		      					</div>
+		      					<div class="col-8">
+		      						<div class="col-sm-auto ls-info-text" style="color:white;">
+		      							Skupna vožnja<br>
+		      							<div id="remaining_time" style="font-size: 1.5rem;">07:15 / 11:00 h</div>
+		      						</div>
+		      					</div>
+		    				</div>
+		    				<div class="row pt-2">
+		      					<div class="col-4 d-flex justify-content-center">
+		      						<img src = "img/coffee-break.png" alt="Underline speed" class="pb-2 pt-2"/>
+		      					</div>
+		      					<div class="col-sm-auto ls-info-text" style="color:white;">
+		      						Naslednji počitek<br>
+		      						<div id="remaining_time" style="font-size: 1.5rem;">2 ure 31 min</div>
+		      					</div>
+		    				</div>
+		      			</div>
+		      		</div>
+		      	</div>
+		      	<div class="row pt-4">
+		    		<div class="col d-flex justify-content-center">
+		      			<div id="infoboxbot" class="rectangle">
+		      				<div class="row d-flex justify-content-center">
+		      					<div id='charging' class="col-4 d-flex justify-content-center">
+		      						<img src = "img/charging.png" alt="Underline speed" class="pb-2 pt-2" />
+		      					</div>
+		      					<div class="col-8">
+		      						<div id="infoboardtoptext" class="col-sm-auto ls-info-text" style="color:white;">
+		      							Naslednje polnjenje čez<br>
+		      							<div id="dist_to_fill" style="font-size: 1.5rem;">350 km</div>
+		      						</div>
+		      					</div>
+		    				</div>
+		    				<div class="row pt-2 d-flex justify-content-center">
+		      					<div id="consumption" class="col-4 d-flex justify-content-center">
+		      						<img src = "img/consumption.png" alt="Underline speed" class="pb-2 pt-2"/>
+		      					</div>
+		      					<div class="col-8">
+			      					<div id="infoboardbottext" class="col-sm-auto ls-info-text" style="color:white;">
+			      						Poraba<br>
+			      						<div id="consumtion_km" style="font-size: 1.5rem;">1,1 kWh/km</div>
+			      					</div>
+			      				</div>
+		    				</div>
+		      			</div>
+		      		</div>
+		      	</div>
+		      	<div class="row flex-grow-1 overflow-auto d-flex ">
+			      	<div class="bottom-info mt-auto d-flex flex-column">
+			      		<div class="row">
+			      			<div class="col d-flex justify-content-center pt-2">
+					      		<div class="col-sm-4 ls-info-text pt-5" style="color:white;font-size: 1.5rem;">
+		      							05:55
+		      					</div>
+		      					<div class="col-sm-3 ls-info-text pt-5 px-1" style="color:white;">Pospešek
+		      							<div class="progress">
+										  <div id="throttle" class="progress-bar" role="progressbar" style="width: 80%" aria-value="50" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+		      					</div>
+		      					<div class="col-sm-3 ls-info-text pt-5 px-1" style="color:white;">Zavora
+		      							<div class="progress">
+										  <div id="brake" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+										</div>
+		      					</div>
+					      	</div>
+			      		</div>
+			        </div>
+		        </div>
+		    </div>
+		    <div class="col px-0 text-center">
+		      <h2 style="color:white;">Autopilot ON</h2>
+		      <div class="row justify-content-center">
+		      	<div class="col-sm-auto" style="color:white;">
+		      		P
+		      	</div>
+		      	<div class="col-sm-auto" style="color:white;">
+		      		N
+		      	</div>
+		      	<div class="col-sm-auto" style="color:#2697FF;">
+		      		D
+		      	</div>
+		      	<div class="col-sm-auto" style="color:white;">
+		      		R
+		      	</div>
+		      </div>
+		      <div class="row justify-content-center">
+		      	<div class="col-4 mb-0">
+		      	</div>
+		      	<div class="col-4 mb-0" style="color:white;">
+		      		<div class="row">
+			          <span id="speed" class="large-text px-2">77</span>
+			         </div>
+			         <div class="row">
+			          <span id="speed" class="px-2">km/h</span>
+			      	</div>
+			    </div>
+		      	<div class="col-4 mb-0 mt-auto">
+		      	</div>
+		      </div>
+		      <div class="row justify-content-center">
+		      	<img src = "img/speed_underline.svg" alt="Underline speed"/>
+		      </div>
+		      <div class="row">
+		    	<video class="cameraview" width="550" height="500" autoplay>
+				  <source src="road_closure.mp4" type="video/mp4">
+				  Your browser does not support the video tag.
+				</video>
+		    </div>
+		    </div>
+		    
+		    <div class="col">
+		      <div class="mapbg row" style="width: 550px; height: 480px" id="mapContainer">
+		      	
+		      </div>
+		      <div class="row">
+		      	<div class="col-4"></div>
+		      	<div class="col-8 pt-5 d-flex justify-content-center">
+			      	<div id="mapinfo" class="rectangle">
+			      		<div class="row">
+			      			<div class="col d-flex justify-content-center">
+			      				<div class="col-8 d-flex flex-column justify-content-center" style="color:white;">
+			      					<div class="row">
+			      						<div class="col-4 d-flex justify-content-center">
+			      							<img src = "img/destination_img.png" alt="Dest image"/>
+			      						</div>
+			      						<div class="col-8 ls-info-text">
+			      							<div id="remaining_time" style="font-size: 1rem;">450 km</div>
+			      						</div>
+			      					</div>
+			      					<div class="row pt-3">
+			      						<div class="col-4 d-flex justify-content-center">
+			      							<img class="desttest" src = "img/time_to_dest.png" alt="Dest time"/>
+			      						</div>
+			      						<div class="col-8 ls-info-text">
+			      							<div id="remaining_time" style="font-size: 1rem;">3 ure 5 min</div>
+			      						</div>
+			      					</div>
+			      					<div class="row">
+			      						<div class="col d-flex justify-content-center">
+			      							Izvoz čez 400 m
+			      						</div>
+			      					</div>
+			      				</div>
+			      				<div class="col-4 ls-info-text d-flex justify-content-center" style="color:white;">
+			      					<div class="row">
+			      						<svg width="105" height="140" viewBox="0 0 150 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M98 42V19L106 30.2149L98 42Z" fill="#373737"/>
+											<path d="M6 237.5V110M6 110C17.8593 51.5706 17 30 92 30M6 110V59.5V34.25V9M98 42L106 30.2149L98 19V42Z" stroke="#2697FF" stroke-width="12"/>
+										</svg>
+			      					</div>
+			      				</div>
+			      			</div>
+			    		</div>
+			      	</div>
+			     </div>
+		      </div>
+		    </div>
+		  </div>
+
+
+		</div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <script src="node_modules/animejs/lib/anime.min.js"></script>
+		<!--<script src="main.js"></script>-->
+		<script src="heremaps.js"></script>
+    </body>
+</html>
