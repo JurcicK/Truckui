@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+    	 <script>
+		  window.onload = function() {setTimeout(function(){document.body.style.opacity="100";},200);};
+		 </script>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -13,14 +16,10 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@500&display=swap" rel="stylesheet">
-		<script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
-		<script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
-    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
-		<meta name="viewport" content="initial-scale=1.0, width=device-width" />
-		<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-harp.js"></script>
+		
     </head>
     <body>
+    	 <style> body  {opacity:0;}</style>
 		<div class="container-fluid d-flex flex-column h-100">
 		  <div class="row h-100 d-flex">
 		    <div class="col px-0 d-flex flex-column">
@@ -36,7 +35,7 @@
 		      					<div class="col-8">
 		      						<div class="col-sm-auto ls-info-text" style="color:white;">
 		      							Skupna vožnja<br>
-		      							<div id="remaining_time" style="font-size: 1.5rem;">07:15 / 11:00 h</div>
+		      							<div id="driving_time" style="font-size: 1.5rem;"></div>
 		      						</div>
 		      					</div>
 		    				</div>
@@ -73,7 +72,7 @@
 		      					<div class="col-8">
 			      					<div id="infoboardbottext" class="col-sm-auto ls-info-text" style="color:white;">
 			      						Poraba<br>
-			      						<div id="consumtion_km" style="font-size: 1.5rem;">1,1 kWh/km</div>
+			      						<div id="consumption_km" style="font-size: 1.5rem;">1,1 kWh/km</div>
 			      					</div>
 			      				</div>
 		    				</div>
@@ -84,7 +83,7 @@
 			      	<div class="bottom-info mt-auto d-flex flex-column">
 			      		<div class="row">
 			      			<div class="col d-flex justify-content-center pt-2">
-					      		<div class="col-sm-4 ls-info-text pt-5" style="color:white;font-size: 1.5rem;">
+					      		<div id="clock" class="col-sm-4 ls-info-text pt-5" style="color:white;font-size: 1.5rem;">
 		      							05:55
 		      					</div>
 		      					<div class="col-sm-3 ls-info-text pt-5 px-1" style="color:white;">Pospešek
@@ -105,16 +104,16 @@
 		    <div class="col px-0 text-center">
 		      <h2 style="color:white;">Autopilot ON</h2>
 		      <div class="row justify-content-center">
-		      	<div class="col-sm-auto" style="color:white;">
+		      	<div id="park_gear" class="col-sm-auto" style="color:white;">
 		      		P
 		      	</div>
-		      	<div class="col-sm-auto" style="color:white;">
+		      	<div id="neutral_gear" class="col-sm-auto" style="color:white;">
 		      		N
 		      	</div>
-		      	<div class="col-sm-auto" style="color:#2697FF;">
+		      	<div id="drive_gear" class="col-sm-auto" style="color:#2697FF;">
 		      		D
 		      	</div>
-		      	<div class="col-sm-auto" style="color:white;">
+		      	<div id="reverse_gear" class="col-sm-auto" style="color:white;">
 		      		R
 		      	</div>
 		      </div>
@@ -126,7 +125,7 @@
 			          <span id="speed" class="large-text px-2">77</span>
 			         </div>
 			         <div class="row">
-			          <span id="speed" class="px-2">km/h</span>
+			          <span class="px-2">km/h</span>
 			      	</div>
 			    </div>
 		      	<div class="col-4 mb-0 mt-auto">
@@ -136,7 +135,7 @@
 		      	<img src = "img/speed_underline.svg" alt="Underline speed"/>
 		      </div>
 		      <div class="row">
-		    	<video class="cameraview" width="550" height="500" autoplay>
+		    	<video id="realtime_radar" class="cameraview" width="550" height="500" autoplay>
 				  <source src="road_closure.mp4" type="video/mp4">
 				  Your browser does not support the video tag.
 				</video>
@@ -144,8 +143,14 @@
 		    </div>
 		    
 		    <div class="col">
-		      <div class="mapbg row" style="width: 550px; height: 480px" id="mapContainer">
-		      	
+		      <div id="navi_map" class="mapbg row">
+		      	<svg width="50" height="450" viewBox="43 0 50 623" fill="none" xmlns="http://www.w3.org/2000/svg">
+		      	<path id="greyed_out" transform="translate(0 10)" d="M229.5 280.5V235.5L226.098 211.376C224.707 201.514 221.851 191.915 217.624 182.897L209 164.5L196 140L182.5 119L174.922 108.334C170.984 102.793 166.492 97.6667 161.514 93.0364L149.053 81.4447C148.018 80.4817 147.008 79.4996 146.002 78.5055C143.442 75.9743 138.104 70.7979 134 67.5C125.08 60.3321 110.562 50.1396 107.919 48.2927C107.64 48.0973 107.361 47.9012 107.083 47.7036L85 32L58 14.5L36.5 0L30.8974 -3.59143C21.72 -9.47438 13.7735 -17.085 7.5 -26V-26" stroke="#7D7D7D" stroke-width="16"/>	
+				<path id="straight_line" d="M229.5 620.5V453V353V290" stroke="#2697FF" stroke-width="16"/>
+				<path id="exit_path" transform="translate(0 10)"  d="M230 290V290C236.93 290 242.548 284.382 242.548 277.452V274.024V255.47V242.586V229.187V229.187C242.548 222.036 243.902 214.951 246.54 208.304L248.069 204.449L254.594 189.504L256.073 187.036C260.423 179.777 265.678 173.1 271.709 167.165L274.671 164.251L284.188 157.001C288.211 153.936 292.46 151.181 296.9 148.759L306.292 143.636L332.392 131.783L411.696 101.891L491 72" stroke="#2697FF" stroke-width="10"/>
+
+				<path id="arrow" d="M1.1 70.095 43.605 1.359c.404-.653 1.376-.6 1.739.093L81.097 69.82c.491.94-.6 1.875-1.46 1.251L46.155 46.789a1.004 1.004 0 0 0-1.093-.063L2.473 71.502c-.896.52-1.917-.526-1.373-1.407Z" fill="#2697FF"/>
+				</svg>
 		      </div>
 		      <div class="row">
 		      	<div class="col-4"></div>
@@ -159,7 +164,7 @@
 			      							<img src = "img/destination_img.png" alt="Dest image"/>
 			      						</div>
 			      						<div class="col-8 ls-info-text">
-			      							<div id="remaining_time" style="font-size: 1rem;">450 km</div>
+			      							<div id="dist_to_finish" style="font-size: 1rem;">450 km</div>
 			      						</div>
 			      					</div>
 			      					<div class="row pt-3">
@@ -167,17 +172,17 @@
 			      							<img class="desttest" src = "img/time_to_dest.png" alt="Dest time"/>
 			      						</div>
 			      						<div class="col-8 ls-info-text">
-			      							<div id="remaining_time" style="font-size: 1rem;">3 ure 5 min</div>
+			      							<div id="time_to_finish" style="font-size: 1rem;">3 ure 5 min</div>
 			      						</div>
 			      					</div>
 			      					<div class="row">
-			      						<div class="col d-flex justify-content-center" id="panel">
+			      						<div id="navi_info" class="col d-flex justify-content-center">
 			      							Izvoz čez 400 m
 			      						</div>
 			      					</div>
 			      				</div>
 			      				<div class="col-4 ls-info-text d-flex justify-content-center" style="color:white;">
-			      					<div class="row">
+			      					<div id="navi_info_icon" class="row">
 			      						<svg width="105" height="140" viewBox="0 0 150 140" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M98 42V19L106 30.2149L98 42Z" fill="#373737"/>
 											<path d="M6 237.5V110M6 110C17.8593 51.5706 17 30 92 30M6 110V59.5V34.25V9M98 42L106 30.2149L98 19V42Z" stroke="#2697FF" stroke-width="12"/>
@@ -197,9 +202,10 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
+        <script src="getdata.js"></script>
         <script src="js/scripts.js"></script>
         <script src="node_modules/animejs/lib/anime.min.js"></script>
-		<!--<script src="main.js"></script>-->
-		<script src="heremaps.js"></script>
+		<script src="main.js"></script>
+		
     </body>
 </html>

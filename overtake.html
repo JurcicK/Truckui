@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>RoadBlockUI</title>
+        <title>OvertakeUI</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -13,12 +13,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@500&display=swap" rel="stylesheet">
-		<script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
-		<script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
-    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
-		<meta name="viewport" content="initial-scale=1.0, width=device-width" />
-		<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-harp.js"></script>
+		
     </head>
     <body>
 		<div class="container-fluid d-flex flex-column h-100">
@@ -36,7 +31,7 @@
 		      					<div class="col-8">
 		      						<div class="col-sm-auto ls-info-text" style="color:white;">
 		      							Skupna vožnja<br>
-		      							<div id="remaining_time" style="font-size: 1.5rem;">07:15 / 11:00 h</div>
+		      							<div id="remaining_time" style="font-size: 1.5rem;">10:45 / 11:00 h</div>
 		      						</div>
 		      					</div>
 		    				</div>
@@ -46,7 +41,7 @@
 		      					</div>
 		      					<div class="col-sm-auto ls-info-text" style="color:white;">
 		      						Naslednji počitek<br>
-		      						<div id="remaining_time" style="font-size: 1.5rem;">2 ure 31 min</div>
+		      						<div id="remaining_time" style="font-size: 1.5rem;">1 ura 15 min</div>
 		      					</div>
 		    				</div>
 		      			</div>
@@ -62,7 +57,7 @@
 		      					<div class="col-8">
 		      						<div id="infoboardtoptext" class="col-sm-auto ls-info-text" style="color:white;">
 		      							Naslednje polnjenje čez<br>
-		      							<div id="dist_to_fill" style="font-size: 1.5rem;">350 km</div>
+		      							<div id="dist_to_fill" style="font-size: 1.5rem;">120 km</div>
 		      						</div>
 		      					</div>
 		    				</div>
@@ -73,7 +68,7 @@
 		      					<div class="col-8">
 			      					<div id="infoboardbottext" class="col-sm-auto ls-info-text" style="color:white;">
 			      						Poraba<br>
-			      						<div id="consumtion_km" style="font-size: 1.5rem;">1,1 kWh/km</div>
+			      						<div id="consumtion_km" style="font-size: 1.5rem;">1,6 kWh/km</div>
 			      					</div>
 			      				</div>
 		    				</div>
@@ -137,15 +132,19 @@
 		      </div>
 		      <div class="row">
 		    	<video class="cameraview" width="550" height="500" autoplay>
-				  <source src="road_closure.mp4" type="video/mp4">
+				  <source src="overtake.mp4" type="video/mp4">
 				  Your browser does not support the video tag.
 				</video>
 		    </div>
 		    </div>
 		    
 		    <div class="col">
-		      <div class="mapbg row" style="width: 550px; height: 480px" id="mapContainer">
-		      	
+		      <div class="mapbg row">
+		      	<svg width="50" height="450" viewBox="43 0 50 623" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path id="straight_line" d="M229.5 689.5V453V353V-2.5" stroke="#2697FF" stroke-width="16"/>
+
+				<path id="arrow" d="M1.1 70.095 43.605 1.359c.404-.653 1.376-.6 1.739.093L81.097 69.82c.491.94-.6 1.875-1.46 1.251L46.155 46.789a1.004 1.004 0 0 0-1.093-.063L2.473 71.502c-.896.52-1.917-.526-1.373-1.407Z" fill="#2697FF"/>
+				</svg>
 		      </div>
 		      <div class="row">
 		      	<div class="col-4"></div>
@@ -159,7 +158,7 @@
 			      							<img src = "img/destination_img.png" alt="Dest image"/>
 			      						</div>
 			      						<div class="col-8 ls-info-text">
-			      							<div id="remaining_time" style="font-size: 1rem;">450 km</div>
+			      							<div id="remaining_time" style="font-size: 1rem;">150 km</div>
 			      						</div>
 			      					</div>
 			      					<div class="row pt-3">
@@ -167,12 +166,12 @@
 			      							<img class="desttest" src = "img/time_to_dest.png" alt="Dest time"/>
 			      						</div>
 			      						<div class="col-8 ls-info-text">
-			      							<div id="remaining_time" style="font-size: 1rem;">3 ure 5 min</div>
+			      							<div id="remaining_time" style="font-size: 1rem;">1 ura 5 min</div>
 			      						</div>
 			      					</div>
 			      					<div class="row">
-			      						<div class="col d-flex justify-content-center" id="panel">
-			      							Izvoz čez 400 m
+			      						<div class="col d-flex justify-content-center">
+			      							Izvoz čez 15 km
 			      						</div>
 			      					</div>
 			      				</div>
@@ -199,7 +198,6 @@
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
         <script src="node_modules/animejs/lib/anime.min.js"></script>
-		<!--<script src="main.js"></script>-->
-		<script src="heremaps.js"></script>
+		<script src="main_overtake.js"></script>
     </body>
 </html>

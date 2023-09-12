@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>RoadBlockUI</title>
+        <title>HighwayExitUI</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -13,12 +13,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@500&display=swap" rel="stylesheet">
-		<script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
-		<script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
-    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
-		<meta name="viewport" content="initial-scale=1.0, width=device-width" />
-		<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-harp.js"></script>
+		
     </head>
     <body>
 		<div class="container-fluid d-flex flex-column h-100">
@@ -137,15 +132,21 @@
 		      </div>
 		      <div class="row">
 		    	<video class="cameraview" width="550" height="500" autoplay>
-				  <source src="road_closure.mp4" type="video/mp4">
+				  <source src="exit_highway.mp4" type="video/mp4">
 				  Your browser does not support the video tag.
 				</video>
 		    </div>
 		    </div>
 		    
 		    <div class="col">
-		      <div class="mapbg row" style="width: 550px; height: 480px" id="mapContainer">
-		      	
+		      <div class="mapbg row">
+		      	<svg width="50" height="450" viewBox="43 0 50 623" fill="none" xmlns="http://www.w3.org/2000/svg">
+		      	<path id="greyed_out" transform="translate(0 10)" d="M229.5 280.5V235.5L226.098 211.376C224.707 201.514 221.851 191.915 217.624 182.897L209 164.5L196 140L182.5 119L174.922 108.334C170.984 102.793 166.492 97.6667 161.514 93.0364L149.053 81.4447C148.018 80.4817 147.008 79.4996 146.002 78.5055C143.442 75.9743 138.104 70.7979 134 67.5C125.08 60.3321 110.562 50.1396 107.919 48.2927C107.64 48.0973 107.361 47.9012 107.083 47.7036L85 32L58 14.5L36.5 0L30.8974 -3.59143C21.72 -9.47438 13.7735 -17.085 7.5 -26V-26" stroke="#7D7D7D" stroke-width="16"/>	
+				<path id="straight_line" d="M229.5 620.5V453V353V290" stroke="#2697FF" stroke-width="16"/>
+				<path id="exit_path" transform="translate(0 10)"  d="M230 290V290C236.93 290 242.548 284.382 242.548 277.452V274.024V255.47V242.586V229.187V229.187C242.548 222.036 243.902 214.951 246.54 208.304L248.069 204.449L254.594 189.504L256.073 187.036C260.423 179.777 265.678 173.1 271.709 167.165L274.671 164.251L284.188 157.001C288.211 153.936 292.46 151.181 296.9 148.759L306.292 143.636L332.392 131.783L411.696 101.891L491 72" stroke="#2697FF" stroke-width="10"/>
+
+				<path id="arrow" d="M1.1 70.095 43.605 1.359c.404-.653 1.376-.6 1.739.093L81.097 69.82c.491.94-.6 1.875-1.46 1.251L46.155 46.789a1.004 1.004 0 0 0-1.093-.063L2.473 71.502c-.896.52-1.917-.526-1.373-1.407Z" fill="#2697FF"/>
+				</svg>
 		      </div>
 		      <div class="row">
 		      	<div class="col-4"></div>
@@ -171,8 +172,8 @@
 			      						</div>
 			      					</div>
 			      					<div class="row">
-			      						<div class="col d-flex justify-content-center" id="panel">
-			      							Izvoz čez 400 m
+			      						<div id="navitext" class="col d-flex justify-content-center">
+			      							<br> 
 			      						</div>
 			      					</div>
 			      				</div>
@@ -199,7 +200,6 @@
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
         <script src="node_modules/animejs/lib/anime.min.js"></script>
-		<!--<script src="main.js"></script>-->
-		<script src="heremaps.js"></script>
+		<script src="main_exit.js"></script>
     </body>
 </html>
